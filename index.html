@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="中小学教学数字化转型成熟度评估系统：教师、教学管理者、学生、学校教务处四类主体的问卷与佐证材料提交入口。">
+<meta name="theme-color" content="#12456B">
+<title>中小学教学数字化转型成熟度评估系统</title>
+<style>
+  :root{
+    --ink:#17222E; --ink-2:#47596B; --ink-3:#7A8A99;
+    --brand:#12456B; --brand-2:#1E6FA8; --brand-3:#E7F0F7;
+    --line:#DCE4EC; --bg:#F2F6FA; --card:#FFFFFF;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+    font-size:16px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    padding:0 0 max(24px,env(safe-area-inset-bottom));
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 18px}
+
+  /* 头部 */
+  header{
+    background:linear-gradient(160deg,#0E3A5A 0%,#12456B 46%,#1B5C8C 100%);
+    color:#fff; padding:38px 0 30px;
+    border-radius:0 0 22px 22px;
+    box-shadow:0 8px 24px rgba(18,69,107,.16);
+  }
+  .kicker{
+    display:inline-block; font-size:12px; letter-spacing:.14em;
+    color:#BFD8EB; border:1px solid rgba(191,216,235,.4);
+    padding:3px 10px; border-radius:999px; margin-bottom:16px;
+  }
+  h1{font-size:26px;line-height:1.35;margin:0 0 10px;font-weight:700;letter-spacing:.02em}
+  h1 small{display:block;font-size:15px;font-weight:400;color:#CFE2F0;margin-top:8px;letter-spacing:.02em}
+  .org{font-size:13px;color:#A9C6DB;margin:0;padding-top:14px;border-top:1px solid rgba(255,255,255,.14)}
+
+  /* 提示条 */
+  .notice{
+    display:flex;gap:10px;align-items:flex-start;
+    background:#FFF8E8;border:1px solid #F3D9A6;color:#7A5410;
+    border-radius:10px;padding:11px 13px;font-size:13.5px;line-height:1.6;
+    margin:20px 0 6px;
+  }
+  .notice b{color:#6B4A0D}
+
+  /* 角色卡 */
+  .section-title{font-size:14px;color:var(--ink-3);margin:22px 0 12px;letter-spacing:.06em}
+  .grid{display:grid;grid-template-columns:1fr;gap:12px}
+  @media(min-width:700px){.grid{grid-template-columns:1fr 1fr;gap:14px}}
+
+  a.card{
+    display:flex;gap:14px;align-items:center;
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 16px 16px 15px;text-decoration:none;color:inherit;
+    box-shadow:0 1px 2px rgba(23,34,46,.04);
+    transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;
+  }
+  a.card:active{transform:scale(.985)}
+  @media(hover:hover){a.card:hover{border-color:#B9CFDF;box-shadow:0 6px 18px rgba(18,69,107,.10);transform:translateY(-1px)}}
+  .ico{
+    flex:0 0 46px;width:46px;height:46px;border-radius:12px;
+    background:var(--brand-3);display:grid;place-items:center;color:var(--brand);
+  }
+  .ico svg{width:23px;height:23px}
+  .body{min-width:0;flex:1}
+  .role{font-size:16.5px;font-weight:700;margin:0 0 3px;letter-spacing:.01em}
+  .desc{font-size:13.5px;color:var(--ink-2);margin:0 0 8px}
+  .meta{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-size:11.5px;color:var(--brand);background:#F0F5FA;border:1px solid #DDE9F2;border-radius:6px;padding:2px 7px;white-space:nowrap}
+  .arrow{flex:0 0 18px;color:#9BABBA}
+
+  /* 须知 */
+  details{
+    margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:0 16px;
+  }
+  details[open]{padding-bottom:14px}
+  summary{cursor:pointer;list-style:none;padding:15px 0;font-size:14.5px;font-weight:600;color:var(--brand);display:flex;justify-content:space-between;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary .chev{transition:transform .2s ease;color:#9BABBA;font-size:13px}
+  details[open] summary .chev{transform:rotate(180deg)}
+  .notes{margin:0;padding:0 0 0 18px;font-size:13.5px;color:var(--ink-2)}
+  .notes li{margin:0 0 9px}
+  .notes li:last-child{margin-bottom:0}
+
+  footer{margin-top:26px;text-align:center;font-size:12px;color:var(--ink-3);line-height:1.9}
+  footer .rule{height:1px;background:var(--line);margin:18px auto 14px;max-width:120px}
+
+  /* 提示浮层 */
+  #toast{
+    position:fixed;left:50%;bottom:38px;transform:translate(-50%,16px);
+    background:rgba(23,34,46,.92);color:#fff;font-size:13.5px;
+    padding:10px 16px;border-radius:10px;max-width:78vw;text-align:center;
+    opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;z-index:9;
+  }
+  #toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="kicker">教学数字化转型 · 成熟度评估</span>
+    <h1>中小学教学数字化转型成熟度评估系统
+      <small>请按您的身份进入对应的填写入口</small>
+    </h1>
+    <p class="org">陕西师范大学教育学部 信息技术课程与教学研究中心</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="notice">
+    <span style="flex:0 0 auto">ⓘ</span>
+    <div>本次调查以匿名方式进行，结果仅用于教育科学研究。教师、教学管理者、学生分别填写一份问卷，每份约需 5—10 分钟；学校教务处或数字化教学负责人提交佐证材料。</div>
+  </div>
+
+  <p class="section-title">选择身份进入</p>
+
+  <div class="grid">
+    <a class="card" data-key="teacher" href="#">
+      <span class="ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M8 9h8M8 12h5"/>
+        </svg>
+      </span>
+      <div class="body">
+        <p class="role">中小学教师</p>
+        <p class="desc">填写问卷 1（教师版）</p>
+        <div class="meta"><span class="tag">21 题</span><span class="tag">约 5—10 分钟</span></div>
+      </div>
+      <span class="arrow" aria-hidden="true">›</span>
+    </a>
+
+    <a class="card" data-key="manager" href="#">
+      <span class="ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <path d="M4 19V9M9 19V5M14 19v-6M19 19v-9"/><path d="M3 21h18"/>
+        </svg>
+      </span>
+      <div class="body">
+        <p class="role">教学管理者</p>
+        <p class="desc">填写问卷 2（教学管理者版）</p>
+        <div class="meta"><span class="tag">21 题</span><span class="tag">约 5—10 分钟</span></div>
+      </div>
+      <span class="arrow" aria-hidden="true">›</span>
+    </a>
+
+    <a class="card" data-key="student" href="#">
+      <span class="ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-5.6 7-5.6s7 2 7 5.6"/>
+        </svg>
+      </span>
+      <div class="body">
+        <p class="role">中小学学生</p>
+        <p class="desc">填写问卷 3（学生版）</p>
+        <div class="meta"><span class="tag">15 题</span><span class="tag">约 5—10 分钟</span></div>
+      </div>
+      <span class="arrow" aria-hidden="true">›</span>
+    </a>
+
+    <a class="card" data-key="evidence" href="#">
+      <span class="ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v4h4M9.5 12h5M9.5 15.5h5"/>
+        </svg>
+      </span>
+      <div class="body">
+        <p class="role">学校教务处 / 数字化教学负责人</p>
+        <p class="desc">提交佐证材料（10 项，支持 Word、PDF、图片）</p>
+        <div class="meta"><span class="tag">16 题</span><span class="tag">约 15—20 分钟</span><span class="tag">需学校全称</span></div>
+      </div>
+      <span class="arrow" aria-hidden="true">›</span>
+    </a>
+  </div>
+
+  <details>
+    <summary>填写须知 <span class="chev">▾</span></summary>
+    <ul class="notes">
+      <li>请选择与自己身份一致的入口；教师、管理者、学生的问卷内容不同，不要代填或混填。</li>
+      <li>问卷为选择题，按第一感觉作答即可，无需查资料；第二部分统一为 1—5 分打分（1＝非常不符合，5＝非常符合）。</li>
+      <li>同一个微信账号每份问卷只能提交一次，提交后不可修改，请确认后再提交。</li>
+      <li>佐证材料每项限上传 1 个文件、单文件不超过 20M；同一项材料（如清单＋照片＋排课表）请合并为一个 PDF。</li>
+      <li>文件命名建议：学校简称-材料序号-材料名称，例如“XX中学-05-空间建设清单”。</li>
+    </ul>
+  </details>
+
+  <footer>
+    <div class="rule"></div>
+    本系统仅用于教学数字化转型成熟度研究的问卷与材料采集<br>
+    不采集与本研究无关的个人信息 · 数据仅供课题组使用
+  </footer>
+</main>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ===== 配置区：把下面四个地址替换成问卷星发布后得到的问卷链接 ===== */
+var LINKS = {
+  teacher:  'https://v.wjx.cn/vm/mqKc0TT.aspx',      /* Q1 教师版 */
+  manager:  'https://v.wjx.cn/vm/rWRLcg8.aspx',      /* Q2 教学管理者版 */
+  student:  'https://v.wjx.cn/vm/hEzYMYy.aspx',      /* Q3 学生版 */
+  evidence: 'https://v.wjx.cn/vm/eIZIk8h.aspx'       /* Q4 佐证材料 */
+};
+
+(function () {
+  var toast = document.getElementById('toast'), timer = null;
+  function tip(msg) {
+    toast.textContent = msg;
+    toast.classList.add('on');
+    clearTimeout(timer);
+    timer = setTimeout(function () { toast.classList.remove('on'); }, 2200);
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('a.card'), function (card) {
+    var key = card.getAttribute('data-key');
+    var url = LINKS[key] || '';
+    var ready = url && url.indexOf('XXXXXXXX') === -1;
+
+    if (ready) {
+      card.setAttribute('href', url);
+    } else {
+      card.setAttribute('href', '#');
+    }
+
+    card.addEventListener('click', function (e) {
+      if (!ready) {
+        e.preventDefault();
+        tip('该入口的问卷链接尚未配置，请在 index.html 的 LINKS 中填入问卷星地址。');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
